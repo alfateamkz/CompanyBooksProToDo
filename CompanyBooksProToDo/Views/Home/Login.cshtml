@@ -1,0 +1,85 @@
+﻿@using CompanyBooksProToDo.Helpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir='rtl'")}>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@LocalizationHelper.GetLocalizedWord("Login")</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/media/css/main1.css">
+
+    <!-- JS -->
+    <script src="~/media/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="~/media/js/bootstrap.min.js"></script>
+
+    <!-- JS INCLUDE RECAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container-fluid content-center">
+        <div class="row">
+            <!-- AUTH BLOCK -->
+            <div class="loginpage">
+                <div class="header">
+                    <div class="title">@LocalizationHelper.GetLocalizedWord("Login")</div>
+                    <div class="lang">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle btn-lite" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @LocalizationHelper.GetLangStr(ApiHelper.GetCurrentLanguage())
+                            </button>
+                            <ul class="dropdown-menu">
+                               @foreach (var lang in ApiHelper.GetLanguages())
+                               {
+                                  <li><button class="dropdown-item" onclick="setLocale(@((int)lang))">@LocalizationHelper.GetLangStr(lang)</button></li>
+                               }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENT AUTH USER -->
+                <div class="content">
+                    <form action="" method="post">
+                        <!-- INPUTS -->
+                        <div class="mb-3">
+                            <label class="form-label">@LocalizationHelper.GetLocalizedWord("Username")</label>
+                            <input type="text" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter username")">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">@LocalizationHelper.GetLocalizedWord("Password")</label>
+                            <input type="password" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter password")">
+                        </div>
+
+                        <!-- reCAPTCHA-->
+                        <div class="captcha-element">
+                            <div class="g-recaptcha" data-sitekey="6Lfn2ewhAAAAACzUJm1Vs1ZP-TRbQEnBcak1N12r"></div>
+                        </div>
+
+                        <div class="button-element">
+                            <button type="button" class="btn btn-success">@LocalizationHelper.GetLocalizedWord("Enter to system")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        async function setLocale(lang) {
+            await fetch(`SetLocale?lang=${lang}`);
+            document.location.reload();
+        }
+    </script>
+
+</body>
+</html>

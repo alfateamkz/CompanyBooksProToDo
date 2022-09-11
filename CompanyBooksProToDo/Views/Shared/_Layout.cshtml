@@ -1,0 +1,63 @@
+﻿@using CompanyBooksProToDo.Helpers
+<!DOCTYPE html>
+<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir='rtl'")}>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/media/css/main1.css">
+    <link rel="stylesheet" href="~/media/css/datatables.min.css">
+
+    <!-- JS -->
+    <script src="~/media/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="~/media/js/bootstrap.min.js"></script>
+    <script src="~/media/js/datatables.min.js"></script>
+
+    <!-- JS INCLUDE RECAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container-fluid content-center">
+        <div class="row">
+            <!-- PAGE BLOCK -->
+            <div class="page">
+                <div class="header">
+                    <div class="title">Company name</div>
+                    <div class="lang">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle btn-lite" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @LocalizationHelper.GetLangStr(ApiHelper.GetCurrentLanguage())
+                            </button>
+                            <ul class="dropdown-menu">
+                               @foreach (var lang in ApiHelper.GetLanguages())
+                               {
+                                  <li><button class="dropdown-item" onclick="setLocale(@((int)lang))">@LocalizationHelper.GetLangStr(lang)</button></li>
+                               }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENT -->
+                <div class="content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function setLocale(lang) {
+            await fetch(`SetLocale?lang=${lang}`);
+            document.location.reload();
+        }
+    </script>
+
+
+</body>
+</html>

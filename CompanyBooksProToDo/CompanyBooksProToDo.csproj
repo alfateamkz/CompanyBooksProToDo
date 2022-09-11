@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Simplify.Windows.Forms" Version="1.1.2" />
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CompanyBooksProLk">
+      <HintPath>..\Api\CompanyBooksProLk.dll</HintPath>
+    </Reference>
+    <Reference Include="CompanyBooksProResources">
+      <HintPath>..\Api\CompanyBooksProResources.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

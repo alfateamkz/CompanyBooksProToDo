@@ -1,0 +1,106 @@
+﻿@using CompanyBooksProToDo.Helpers
+@using CompanyBooksProToDo.ViewModels.Home
+@{
+    ViewData["Title"] = LocalizationHelper.GetLocalizedWord("Tasks");
+}
+@model IndexVM
+
+<div class="content">
+    <form action="" method="post">
+        <div class="content">
+            <div class="row">
+                <div class="dateandtime">
+                    <div class="title">@LocalizationHelper.GetLocalizedWord("Time")</div>
+                    <div class="time" id="time"></div>
+                    <script>
+                        var time = setInterval(function () {
+                            var date = new Date();
+                            document.getElementById("time").innerHTML = (('0' + date.getDate()).slice(-2) + "/" + ('0' + date.getMonth()).slice(-2) + "/" + date.getFullYear() + " " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2) + ":" + ('0' + date.getSeconds()).slice(-2));
+                        }, 1000);
+                    </script>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            @LocalizationHelper.GetLocalizedWord("Day")
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            @LocalizationHelper.GetLocalizedWord("Opened")
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            @LocalizationHelper.GetLocalizedWord("Text")
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            @LocalizationHelper.GetLocalizedWord("Close")
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <table class="table" id="tebleid">
+                    <thead>
+                        <tr>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Task")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Type")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Task for")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Opened at")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Reminder")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Opened")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Start time")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Closed")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("End time")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Task l")</th>
+                            <th scope="col">@LocalizationHelper.GetLocalizedWord("Close on")</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var mission in Model.Missions)
+                       {
+                            <tr>
+                                <td>@mission.sMISSION_NAME</td>
+                                <td>@mission.lEmailingType</td>
+                                <td>@mission.sMISSION_FOR_EMPLOYEE_NAME</td>
+                                <td>@mission.sMISSION_NAME</td>
+                                <td>@mission.DATE_MISSION_DATE_REMINDER.ToString("yyyy.MM.dd")</td>
+                                <td>@mission.DATE_MISSION_DATE_OPEN.ToString("yyyy.MM.dd")</td>
+                                <td>@mission.DATE_MISSION_WORKDAY_TIME_START.ToString("yyyy.MM.dd")</td>
+                                <td><input class="form-check-input" type="checkbox" disabled @if(mission.bMISSION_IS_CLOSE){@("checked")}></td>
+                                <td>@mission.DATE_MISSION_WORKDAY_TIME_FINISH.ToString("yyyy.MM.dd")</td>
+                                <td>none</td>
+                                <td>@mission.DATE_MISSION_DATE_CLOSE.ToString("yyyy.MM.dd")</td>
+                                <button type="button" class="btn btn-success">@LocalizationHelper.GetLocalizedWord("Edit")</button>
+                            </tr>
+                        }  
+                    </tbody>
+                </table>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('#tebleid').DataTable();
+                });
+            </script>
+        </div>
+        <div class="button-element">
+            <button type="button" class="btn btn-success">@LocalizationHelper.GetLocalizedWord("Create")</button>
+        </div>
+    </form>
+</div>

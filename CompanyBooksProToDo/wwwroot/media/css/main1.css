@@ -1,0 +1,144 @@
+body {
+    position: relative;
+    background: #f9f9f9;
+}
+
+.dateandtime {
+    display: flex;
+    gap: 5px;
+    margin: 0 0 20px 0;
+}
+
+.dateandtime > .title {
+    font-weight: 600;
+}
+
+#tebleid_wrapper {
+    margin: 30px 0 10px 0;
+}
+
+.container-fluid.content-center {
+    position: relative;
+    height: 100vh;
+}
+
+.loginpage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto!important;
+    width: 400px;
+    background: #fff;
+}
+
+.loginpage > .header {
+    display: flex;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #4c4b64;
+    font-weight: 600;
+    border-left: 4px solid #ef7070;
+    margin: 20px 0 15px -12px;
+    padding: 2px 25px 2px 25px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginpage > .content {
+    padding: 10px 15px;
+}
+
+.page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto!important;
+    width: 80%;
+    background: #fff;
+}
+
+.page > .header {
+    display: flex;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #4c4b64;
+    font-weight: 600;
+    border-left: 4px solid #ef7070;
+    margin: 20px 0 15px -12px;
+    padding: 2px 25px 2px 25px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page > .content {
+    padding: 10px 15px;
+}
+
+.panel.panel-default {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* --- INPUT, BUTTON, LABELS --- */
+.form-label {
+    color: #5b5a6c;
+    margin-bottom: 0.2rem;
+}
+
+.button-element {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 10px 25px;
+}
+
+button.btn.btn-success {
+    background: #47c088;
+}
+
+button.btn.btn-secondary.btn-sm.dropdown-toggle.btn-lite {
+    padding: 3px 0;
+    align-items: center;
+    background: #fff;
+    color: #4c4b64;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* --- CAPTCHA --- */
+.captcha-element {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.page.update {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    margin: auto!important;
+    width: 80%;
+    background: #fff;
+}
+
+@media (min-width: 340px) and (max-width: 768px) {
+    #tebleid_filter {
+        margin: 10px;
+    }
+
+    #tebleid_paginate {
+        margin: 20px 0 0 0;
+    }
+
+    .row.marginmobile {
+        margin-top: 20px;
+    }
+}

@@ -1,6 +1,7 @@
 using CompanyBooksProECom;
 using CompanyBooksProECom.Services;
 using CompanyBooksProECom.Utils;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,15 +27,25 @@ namespace CompanyBooksProToDo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // установка конфигурации подключени
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
+                });
+
+
             services.AddControllersWithViews();
 
 
             services.AddMemoryCache();
+            services.AddCookiePolicy(o => { });
 
             services.Configure<ApiParams>(Configuration.GetSection(nameof(ApiParams)));
             services.Configure<CompanyParams>(Configuration.GetSection(nameof(CompanyParams)));
 
             services.AddScoped<IAppConfigService, AppConfigService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,17 +62,22 @@ namespace CompanyBooksProToDo
                 app.UseHsts();
             }
 
-            app.UseMiddleware<AppConfigServiceMiddleware>();
+        
 
 
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
 
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация
+
+            app.UseMiddleware<AppConfigServiceMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

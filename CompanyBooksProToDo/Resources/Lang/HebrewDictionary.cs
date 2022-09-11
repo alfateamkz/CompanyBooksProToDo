@@ -23,7 +23,6 @@ namespace CompanyBooksProToDo.Resources.Lang
             { "Opened" , "משימה פתוחה" },
             { "Text" , "הודעה" },
             { "Close" , "משימה סגורה" },
-            { "Task" , "משימה" },
             { "Type" , "סוג" },
             { "Task for" , "משימה ל-" },
             { "Opened at" , "נפתח ע''י" },
@@ -52,7 +51,8 @@ namespace CompanyBooksProToDo.Resources.Lang
             { "Thursday" , "יום חמישי" },
             { "Friday" , "יום שישי" },
             { "Saturday" , "שבת" },
-            { "Select date" , "Select date" },
+            { "Select date" , "בחירת תאריך" },
+            { "Invalid username or password" , "שם משתמש או סיסמא שגויים!" },
             { "" , "" },
         };
     }

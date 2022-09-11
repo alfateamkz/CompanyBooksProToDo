@@ -1,6 +1,6 @@
 ﻿@using CompanyBooksProToDo.Helpers
 <!DOCTYPE html>
-<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir='rtl'")}>
+<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir=rtl")}>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@
             <!-- PAGE BLOCK -->
             <div class="page">
                 <div class="header">
-                    <div class="title">Company name</div>
+                    <div class="title">@ApiHelper.GetCompanyName()</div>
                     <div class="lang">
                         <div class="btn-group">
                             <button class="btn btn-secondary btn-sm dropdown-toggle btn-lite" type="button" data-bs-toggle="dropdown" aria-expanded="false">

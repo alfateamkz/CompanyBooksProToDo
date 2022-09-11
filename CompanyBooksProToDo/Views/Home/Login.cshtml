@@ -1,10 +1,10 @@
 ﻿@using CompanyBooksProToDo.Helpers
 @{
     Layout = null;
+    var currentLang = ApiHelper.GetCurrentLanguage();
 }
-
 <!DOCTYPE html>
-<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir='rtl'")}>
+<html lang="en" @if(ApiHelper.IsCurrentLanguageRightToLeft()){@("dir=rtl")}>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,8 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="~/media/js/bootstrap.min.js"></script>
 
+
+
     <!-- JS INCLUDE RECAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=@LocalizationHelper.GetLangCode(currentLang)" async defer></script>
 </head>
 <body>
     <div class="container-fluid content-center">
@@ -33,7 +35,7 @@
                     <div class="lang">
                         <div class="btn-group">
                             <button class="btn btn-secondary btn-sm dropdown-toggle btn-lite" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                @LocalizationHelper.GetLangStr(ApiHelper.GetCurrentLanguage())
+                                @LocalizationHelper.GetLangStr(currentLang)
                             </button>
                             <ul class="dropdown-menu">
                                @foreach (var lang in ApiHelper.GetLanguages())
@@ -47,16 +49,16 @@
 
                 <!-- CONTENT AUTH USER -->
                 <div class="content">
-                    <form action="" method="post">
+                    <form asp-action="Auth" asp-controller="Auth" onsubmit="auth(event)" method="post">
                         <!-- INPUTS -->
                         <div class="mb-3">
                             <label class="form-label">@LocalizationHelper.GetLocalizedWord("Username")</label>
-                            <input type="text" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter username")">
+                            <input id="username_input" name="username" type="text" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter username")">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">@LocalizationHelper.GetLocalizedWord("Password")</label>
-                            <input type="password" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter password")">
+                            <input id="password_input" name="password" type="password" class="form-control" placeholder="@LocalizationHelper.GetLocalizedWord("Enter password")">
                         </div>
 
                         <!-- reCAPTCHA-->
@@ -65,7 +67,7 @@
                         </div>
 
                         <div class="button-element">
-                            <button type="button" class="btn btn-success">@LocalizationHelper.GetLocalizedWord("Enter to system")</button>
+                            <button type="submit" class="btn btn-success">@LocalizationHelper.GetLocalizedWord("Enter to system")</button>
                         </div>
                     </form>
                 </div>
@@ -79,6 +81,33 @@
             await fetch(`SetLocale?lang=${lang}`);
             document.location.reload();
         }
+    </script>
+
+    <script>
+
+        async function auth(event){
+            event.preventDefault();
+
+            let username = document.getElementById('username_input').value;
+            let password = document.getElementById('password_input').value;
+
+           await fetch(document.location.origin + `/HasUser?username=${username}&password=${password}`)
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+                  console.log(data);
+
+                  if(data === true){
+                     event.target.submit();
+                  }
+                  else{
+                     alert('@LocalizationHelper.GetLocalizedWord("Invalid username or password")');
+                  }
+              });
+
+        }
+
     </script>
 
 </body>

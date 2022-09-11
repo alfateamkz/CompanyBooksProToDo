@@ -1,4 +1,5 @@
-﻿using CompanyBooksProToDo.Helpers;
+﻿using CompanyBooksProToDo.Abstractions;
+using CompanyBooksProToDo.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Claims;
@@ -6,15 +7,8 @@ using System.Threading.Tasks;
 
 namespace Alfateam.Controllers
 {
-    public class MainController : Controller
+    public class MainController : AbsController
     {
-
-        [NonAction]
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            ApiHelper.Context = HttpContext;
-        }
-
 
         [HttpGet,Route("SetLocale")]
         public async Task SetLocale(enumLanguagesEnum lang)

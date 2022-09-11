@@ -23,7 +23,6 @@ namespace CompanyBooksProToDo.Resources.Lang
             { "Opened" , "Opened" },
             { "Text" , "Text" },
             { "Close" , "Close" },
-            { "Task" , "Task" },
             { "Type" , "Type" },
             { "Task for" , "Task for" },
             { "Opened at" , "Opened at" },
@@ -55,6 +54,7 @@ namespace CompanyBooksProToDo.Resources.Lang
             { "Friday" , "Friday" },
             { "Saturday" , "Saturday" },
             { "Select date" , "Select date" },
+            { "Invalid username or password" , "Invalid username or password" },
             { "" , "" },
 
         };

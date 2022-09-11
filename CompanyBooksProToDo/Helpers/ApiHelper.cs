@@ -13,8 +13,23 @@ namespace CompanyBooksProToDo.Helpers
     public static class ApiHelper
     {
         public static ApiClientConfig ApiConfig { get; set; }
-        public static Employee CurrentUser { get; set; }
         public static HttpContext Context { get; set; }
+        public static Employee CurrentUser
+        {
+            get
+            {
+                if (Context == null) return null;
+                if (!Context.Request.Cookies.ContainsKey("Id_client"))
+                    return null;
+                return new Employee
+                {
+                    Id_client = Convert.ToInt32(Context.Request.Cookies["Id_client"]),
+                    Client_name = Context.Request.Cookies["Client_name"],
+                    Client_number = Context.Request.Cookies["Client_number"],
+                };
+            }
+        }
+
 
         #region General info
         public static string GetCompanyName()
@@ -67,9 +82,9 @@ namespace CompanyBooksProToDo.Helpers
             var row = dataset.Tables[0].Rows[0];
             var user = new Employee
             {
-                Id_client = (int)row["Id_client"],
-                Client_name = (string)row["Id_client"],
-                Client_number = (string)row["Client_number"],
+                Id_client = (int)(long)row["Id_client"],
+                Client_name = (string)row["Client_name"],
+                Client_number = ((string)row["Client_number"]),
             };
             return user;
         }
